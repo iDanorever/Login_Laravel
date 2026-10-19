@@ -7,6 +7,15 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## 📥 Descarga Directa de Documentación (.docx)
+
+Haz clic en los siguientes enlaces para descargar la documentación completa lista para imprimir o presentar:
+
+* 📄 [**Descargar Informe Técnico de Implementación (.docx)**](./docs/informe1.docx?raw=true)
+* ⚙️ [**Descargar Guía de Configuración y Comandos (.docx)**](./docs/inform2.1.docx?raw=true)
+* 🗄️ [**Descargar Script SQL y Procedimientos Almacenados (.docx)**](./docs/inform3.docx?raw=true)
+
+---
 # 🔐 TechAuth - Sistema de Autenticación, Recuperación de Contraseña y Passkeys
 
 ![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
