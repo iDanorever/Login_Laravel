@@ -61,3 +61,62 @@ CREATE TABLE IF NOT EXISTS Usuario (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+Nota: Revisa los scripts de los 5 Procedimientos Almacenados (sp_Usuario_Guardar, sp_Usuario_Login, sp_Usuario_LoginCodigo, sp_Usuario_GuardarCodigo, sp_Usuario_UpdatePassword) incluidos en la documentación.
+
+## ⚙️ Configuración e Instalación Local
+1. Clonar el repositorio
+
+```git clone [https://github.com/iDanorever/Login_Laravel.git](https://github.com/iDanorever/Login_Laravel.git)
+cd Login_Laravel
+```
+---
+## 2. Configurar Variables de Entorno
+Copia el archivo .env.example a .env y configura tus credenciales locales:
+
+
+```
+cp .env.example .env
+```
+
+Configura tus credenciales SMTP de Gmail en el .env:
+
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=loginDB
+DB_USERNAME=root
+DB_PASSWORD=
+
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_ENCRYPTION=tls
+MAIL_USERNAME=tu_correo@gmail.com
+MAIL_PASSWORD=tu_contraseña_de_aplicacion
+MAIL_FROM_ADDRESS="tu_correo@gmail.com"
+MAIL_FROM_NAME="TechAuth Security"
+```
+---
+
+## 3. Iniciar el Servidor Laravel
+
+```
+php artisan config:clear
+php artisan route:clear
+php artisan serve --port=8000
+```
+
+## 4. Exponer con Ngrok (Para Pruebas en Celular)
+En una segunda terminal:
+```
+ngrok http 8000
+```
+Copia la URL https://xxxx.ngrok-free.dev generada y pégala en el parámetro APP_URL de tu .env
+
+---
+
+🧑‍💻 Autor
+Desarrollado por iDanorever
+Desarrollador de Software
