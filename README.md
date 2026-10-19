@@ -7,53 +7,57 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+# 🔐 TechAuth - Sistema de Autenticación, Recuperación de Contraseña y Passkeys
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Ngrok](https://img.shields.io/badge/Ngrok-111?style=for-the-badge&logo=ngrok&logoColor=white)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Sistema completo y robusto de autenticación desarrollado en **Laravel (API RESTful)** y **MySQL**, optimizado para entornos de escritorio y dispositivos móviles. Incorpora un flujo de recuperación de contraseña en tres pasos vía **SMTP (Gmail)** y la generación de códigos únicos de respaldo (**Passkeys**).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🚀 Características Principales
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+* **Autenticación Multi-factor / Passkey:** Soporte para inicio de sesión estándar y acceso alternativo mediante código único de respaldo (*Passkey*).
+* **Recuperación en 3 Pasos:** Flujo dinámico desde `recuperar.html` (Solicitud de código ➔ Restablecimiento ➔ Generación opcional de nuevo Passkey).
+* **Emails Responsivos en Dark Mode:** Plantilla HTML/Blade (`recuperacion.blade.php`) optimizada para evitar la inversión de colores en clientes de correo móviles.
+* **Persistencia mediante Stored Procedures:** Seguridad e integridad en la base de datos utilizando Procedimientos Almacenados en MySQL.
+* **Soporte Móvil vía Ngrok:** Integración con túneles HTTPS para pruebas en tiempo real desde redes móviles externas.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## 🛠️ Tecnologías Utilizadas
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+* **Backend:** Laravel 11.x (PHP 8.x) - Arquitectura API RESTful.
+* **Base de Datos:** MySQL (`loginDB`) con Procedimientos Almacenados (*Stored Procedures*).
+* **Notificaciones:** SMTP (Gmail) vía `Mailable` (`RecuperacionMail`).
+* **Frontend:** HTML5, JavaScript (ES6+ `fetch` API), Tailwind CSS (Estilo Cyberpunk / Dark Mode).
+* **Herramientas de Red:** Ngrok para túneles SSL/TLS.
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## 🗄️ Estructura de la Base de Datos (`loginDB`)
 
-## Contributing
+Para inicializar la base de datos, ejecuta el archivo SQL adjunto en el proyecto o corre el siguiente script en tu gestor MySQL:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```sql
+CREATE DATABASE IF NOT EXISTS loginDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE loginDB;
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+CREATE TABLE IF NOT EXISTS Usuario (
+    IdUsuario INT AUTO_INCREMENT PRIMARY KEY,
+    Nombres VARCHAR(100) NOT NULL,
+    Apellidos VARCHAR(100) NOT NULL,
+    Dni CHAR(8) NOT NULL UNIQUE,
+    FechaNacimiento DATE NOT NULL,
+    Edad INT NOT NULL,
+    Telefono VARCHAR(20) NOT NULL,
+    Correo VARCHAR(150) NOT NULL UNIQUE,
+    Passwordd VARCHAR(255) NOT NULL,
+    codigo_respaldo VARCHAR(50) DEFAULT NULL,
+    codigo_recuperacion VARCHAR(10) DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
