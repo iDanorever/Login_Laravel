@@ -11,10 +11,10 @@
 
 Haz clic en los siguientes enlaces para descargar la documentación completa lista para imprimir o presentar:
 
-* 📄 [**Descargar Informe Técnico de Implementación (.docx)**](./docs/explicacion1.docx?raw=true)
-* ⚙️ [**Descargar Guía de Configuración y Comandos (.docx)**](./docs/explicacion2.1.docx?raw=true)
-* 🗄️ [**Descargar Script SQL y Procedimientos Almacenados (.docx)**](./docs/explicacion3.docx?raw=true)
 
+* 📄 [**Descargar Informe Técnico de Implementación (.docx)**](https://github.com/iDanorever/Login_Laravel/releases/download/v1.0.0/explicacion1.docx)
+* ⚙️ [**Descargar Guía de Configuración y Comandos (.docx)**](https://github.com/iDanorever/Login_Laravel/releases/download/v1.0.0/explicacion2.1.docx)
+* 🗄️ [**Descargar Script SQL y Procedimientos Almacenados (.docx)**](https://github.com/iDanorever/Login_Laravel/releases/download/v1.0.0/explicacion3.docx)
 ---
 # 🔐 TechAuth - Sistema de Autenticación, Recuperación de Contraseña y Passkeys
 
